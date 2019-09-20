@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wacky Widgies</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">  
+
+</head>
+<body>
+    <h1>Wacky Widgets</h1>
+    {% if widget_list|length == 0 %}
+    <h3>No Widgets</h3>
+    {% else %}
+    <table>
+        <thead>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Delete</th>
+        <t/head>
+        <tbody>
+            {% endif %}
+                {% for widget in widget_list %}
+                <tr>
+                  <td>{{ widget.name }}</td>
+                  <td>{{ widget.quantity }}</td>
+                  <td>
+                    <form action="{% url 'delete' widget.id %}">
+                        <input type="submit" value="X" class="pure-button">
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+             </tbody>
+            </table>
+            <hr>
+            <form action="" method="POST" class="pure-form">
+                <h4>Add Widget</h4>
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" value="Add Widget" class="submit-btn">
+            </form>
+           </body>
+           </html>
+           
+           
+           
